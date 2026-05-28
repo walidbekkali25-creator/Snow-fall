@@ -1,0 +1,35 @@
+from graphics2 import *
+import random
+import time
+
+NUM_FLAKES = 100
+FLAKE_RADIUS = 5
+FALL_SPEED=2
+DRIFT_SPEED=2
+
+def main():
+    window = GraphWin('Snowfall', 800, 600, autoflush=False)
+    window.setBackground('black')
+    # Your code goes here.
+    flakes=[]
+    for _ in range(NUM_FLAKES):
+        center=Point(random.randrange(800),random.randrange(600))
+        flake=Circle(center,FLAKE_RADIUS)
+        flake.setFill('white')
+        flakes.append(flake)
+    
+    
+    for flake in flakes:
+        flake.draw(window)
+    
+    
+    while True:
+        for flake in flakes:
+            flake.move(DRIFT_SPEED, FALL_SPEED)
+        window.update()
+        time.sleep(1/120)
+        if window.checkMouse():
+            break
+    window.close()
+        
+main()
